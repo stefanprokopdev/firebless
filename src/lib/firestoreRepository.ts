@@ -35,7 +35,7 @@ export const bind = <Model extends { id?: string }>(collection: CollectionRefere
             return getModelData<Model>(doc);
         },
         detailById: async (id: string) => {
-            const doc = await detailById<Model>(collection, id);
+            const doc = await detailById(collection, id);
             return getModelData<Model>(doc);
         },
         getCollection: () => collection,

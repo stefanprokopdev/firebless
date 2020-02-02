@@ -91,7 +91,7 @@ export const detail = async <T extends { id?: string }>(collection: CollectionRe
     return records.length <= 0 ? null : records[0];
 };
 
-export const detailById = async <T extends { id?: string }>(collection: CollectionReference, id: string) => {
+export const detailById = async (collection: CollectionReference, id: string) => {
     logger(`[detailById]: trying to find doc #${id} in collection #${collection.id} in path ${collection.path}`);
     const record = await collection.doc(id).get();
     logger(`[detailById]: #${record.id} found`);

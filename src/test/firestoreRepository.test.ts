@@ -3,7 +3,7 @@ import MockFirebase from 'mock-cloud-firestore';
 import { defaultFirestoreRepository } from '../lib/index';
 import { idMatcher } from './matchers';
 
-let fixtures = {
+const fixtures = {
     __collection__: {
         users: {
             __doc__: {

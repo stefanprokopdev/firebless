@@ -2,7 +2,7 @@
 import MockFirebase from 'mock-cloud-firestore';
 import { defaultFirestoreRepository } from '../lib/index';
 
-let fixtures = {
+const fixtures = {
     __collection__: {
         users: {
             __doc__: {
@@ -42,7 +42,7 @@ const userRepository = (defaultRepo => {
     return {
         ...defaultRepo,
         list,
-    }
+    };
 })(defaultFirestoreRepository.bind<User>(firestore.collection('users')));
 
 describe('Custom repository', () => {
