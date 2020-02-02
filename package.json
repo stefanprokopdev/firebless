@@ -1,7 +1,7 @@
 {
   "name": "firebless",
   "description": "Firebless allows you to create repositories from Firestore collections",
-  "version": "0.0.0",
+  "version": "0.1.0",
   "author": "Stefan Prokop <sprokop1010@seznam.cz>",
   "main": "./dist/main.js",
   "files": [
