@@ -1,7 +1,7 @@
 {
     "includeDeclarations": true,
     "excludeExternals": true,
-    "name": "Package template",
+    "name": "Firebless",
     "mode": "file",
     "out": "docs"
 }

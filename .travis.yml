@@ -35,7 +35,7 @@ deploy:
     email: sprokop1010@seznam.cz
     skip_cleanup: true
     api_key:
-      secure: $NPM_TOKEN
+      secure: MNrefymad++42Cgbr7/3f0NoNKRVYxiizps2hdqICm4tVS9uoMUyRPPSV+F98tSLZXg0uwSxUGvqPr78Mq+7VSwUJdUkZ4hF3TD1o6MlpqyPSIYZYyEwScP3CT9L9VdQLplCT2r+yCuqoy3fPzS4mDH8l1i5rpnLglprmoKIy1nHrEg9NlYSf14Wx6ocfxttndpgyrKBdx+8XsYvmNFKMyXcAvy+NnX2M2vJH8JfNPt66s2KPzJwXPW+pwrfUrPe+ALWchilp4odPCjdx4OgtGAP3yfzbrJBkx/YYAtD3GSSMxwrZUhxlt3RgWW1Vx/e/NnjFDCYTaUmnesbzW4bCE92zawecafITm0cO6tXlbF3YGF6C/h+9KhrUZllYe1l1R6ZRsH1QI4RLRtcoJjBlRn5F2yoojlE/FT/vCT1km2yuXFG1uthaVfMg54gYbnfYyGjlMeMSJHRKnllpXi+QMIUf1qMC0A+pvima3y5lOIDHvRFm5tqctzWghz1S4rEM3AU/V0paxL3QnvHkPTn8YObP5Oit4s8HYeDXtiJ0YcnhnaCyuf77oxAufq2CDdUI/hTXwwEGQrFxcxjf7ifr4/sF6IBx+Dly8tp1gn6Ow8m2ieptSMOg4RHxz+XQW9SkUKS5Gi0ZUQT2F+lLB/e/6TZIBW3Nwpo4lj2jGiX9Vw=
     on:
       tags: true
       repo: stefan-prokop-cz/firebless

@@ -65,6 +65,8 @@ const userRepository = (defaultRepo => {
 - [Delete](./DeleteExample.md)
 - [Bulk](./BulkExample.md)
 
+- [API documentation](https://stefan-prokop-cz.github.io/firebless/)
+
 ## Debug
 
 You need to set the `NODE_DEBUG` variable to the `firebless`.
