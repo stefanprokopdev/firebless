@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Custom repository List 1`] = `
+Object {
+  "age": 30,
+  "birthDate": Object {
+    "toDate": [Function],
+  },
+  "createdAt": undefined,
+  "id": "user_b",
+  "name": "user",
+  "surname": "a",
+  "updatedAt": undefined,
+}
+`;

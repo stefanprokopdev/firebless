@@ -1,0 +1,94 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Firestore repository Create 1`] = `
+Object {
+  "age": 10,
+  "birthDate": Object {
+    "toDate": [Function],
+  },
+  "createdAt": undefined,
+  "id": Any<String>,
+  "name": "Test",
+  "surname": "Testovic",
+  "updatedAt": undefined,
+}
+`;
+
+exports[`Firestore repository Detail by ID 1`] = `
+Object {
+  "age": 1,
+  "birthDate": Object {
+    "toDate": [Function],
+  },
+  "createdAt": undefined,
+  "id": "123",
+  "name": "Stefan",
+  "surname": "Stefan",
+  "updatedAt": undefined,
+}
+`;
+
+exports[`Firestore repository Detail with filters 1`] = `
+Object {
+  "age": 30,
+  "birthDate": Object {
+    "toDate": [Function],
+  },
+  "createdAt": undefined,
+  "id": "user_b",
+  "name": "user",
+  "surname": "b",
+  "updatedAt": undefined,
+}
+`;
+
+exports[`Firestore repository List 1`] = `
+Object {
+  "age": 15,
+  "birthDate": Object {
+    "toDate": [Function],
+  },
+  "createdAt": undefined,
+  "id": "user_a",
+  "name": "user",
+  "surname": "a",
+  "updatedAt": undefined,
+}
+`;
+
+exports[`Firestore repository List with filters 1`] = `
+Object {
+  "age": 15,
+  "birthDate": Object {
+    "toDate": [Function],
+  },
+  "createdAt": undefined,
+  "id": "user_a",
+  "name": "user",
+  "surname": "a",
+  "updatedAt": undefined,
+}
+`;
+
+exports[`Firestore repository Update by ID 1`] = `
+Object {
+  "createdAt": undefined,
+  "id": "user_a",
+  "surname": "c",
+  "updatedAt": undefined,
+}
+`;
+
+exports[`Firestore repository Upsert 1`] = `
+Object {
+  "age": 1,
+  "birthDate": Object {
+    "toDate": [Function],
+  },
+  "createdAt": undefined,
+  "id": "123",
+  "name": "Stefan",
+  "surname": "Stefan",
+  "updatedAt": undefined,
+}
+`;

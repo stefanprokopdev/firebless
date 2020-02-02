@@ -1,0 +1,7 @@
+{
+    "includeDeclarations": true,
+    "excludeExternals": true,
+    "name": "Package template",
+    "mode": "file",
+    "out": "docs"
+}
