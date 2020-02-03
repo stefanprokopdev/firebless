@@ -33,6 +33,17 @@ const createUser = (): Promise<User> => {
 }
 ```
 
+## Upsert
+- The `upsert` method allows you to create or update if record already exist
+- It trying to find record by ID
+
+```typescript
+const user = { name: 'Stefan', surname: 'Prokop', age: 15 };
+
+const upsert = () => userRepository.upsert(user);
+const upsertWithOptions = () => userRepository.upsert(user, { merge: true });
+```
+
 ## Custom create method
 ```typescript
 const userRepository = (defaultRepo => {
