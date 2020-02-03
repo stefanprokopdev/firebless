@@ -11,7 +11,6 @@ import {
     detailById,
     getModelData,
     list,
-    Pagination,
     remove,
     removeById,
     update,
@@ -40,7 +39,7 @@ export const bind = <Model extends { id?: string }>(collection: CollectionRefere
         },
         getCollection: () => collection,
         getFirestore: () => collection.firestore,
-        list: async (filters?: Partial<Model> & Pagination, options?: Query) => {
+        list: async (filters?: Partial<Model>, options?: Query) => {
             const docs = await list<Model>(collection, filters, options);
             return docs.map(doc => getModelData<Model>(doc)) as Model[];
         },

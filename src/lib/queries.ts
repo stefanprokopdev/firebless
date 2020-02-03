@@ -7,11 +7,6 @@ import Precondition = FirebaseFirestore.Precondition;
 
 const logger = util.debuglog('firebless');
 
-export interface Pagination {
-    limit?: number;
-    offset?: number;
-}
-
 export const bulkCreate = async <T extends { id?: string }>(collection: CollectionReference, data?: Partial<T>[]) => {
     const batch = collection.firestore.batch();
     logger(`[bulkCreate]: initialized on collection #${collection.id} in path ${collection.path}`, { data, dataLength: data?.length });
@@ -56,7 +51,7 @@ export const create = async <T extends { id?: string }>(collection: CollectionRe
     return doc.get();
 };
 
-export const list = async <T extends { id?: string }>(collection: CollectionReference, filters?: Partial<T> & Pagination, options?: Query) => {
+export const list = async <T extends { id?: string }>(collection: CollectionReference, filters?: Partial<T>, options?: Query) => {
     logger(`[list]: initialized on collection #${collection.id} in path ${collection.path}`, { filters, options });
     const result = await applyFilters(options || collection, filters).get();
     logger(`[list]: ${result.size} records found`);
@@ -161,15 +156,5 @@ export const applyFilters = <T extends object>(query: Query, filters?: Partial<T
         // @ts-ignore
         query = query.where(field, '==', filters[field]);
     });
-    return applyPagination(query, filters);
-};
-
-export const applyPagination = (query: Query, params?: Pagination) => {
-    if (params?.offset) {
-        query = query.offset(params.offset);
-    }
-    if (params?.limit) {
-        query = query.limit(params.limit);
-    }
     return query;
 };

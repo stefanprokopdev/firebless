@@ -63,13 +63,6 @@ describe('Firestore repository', () => {
         expect(Array.isArray(users)).toBe(true);
         expect(users).toHaveLength(0);
     });
-    it('List with pagination', async () => {
-        const users = await userRepository.list({ limit: 1 });
-        expect(Array.isArray(users)).toBe(true);
-        expect(users).toHaveLength(1);
-        const { surname } = users[0];
-        expect(surname).toBe('a');
-    });
     it('List with ordering', async () => {
         const users = await userRepository.list({}, userRepository.getCollection().orderBy('age', 'desc'));
         expect(Array.isArray(users)).toBe(true);

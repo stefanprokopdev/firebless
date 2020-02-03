@@ -2,7 +2,6 @@ import * as defaultFirestoreRepository from './firestoreRepository';
 export { default as initFirestore } from './initFirestore';
 export {
     applyFilters,
-    applyPagination,
     bulkCreate,
     bulkDelete,
     bulkUpdate,
@@ -12,7 +11,6 @@ export {
     getDocument,
     getModelData,
     list,
-    Pagination,
     remove,
     removeById,
     update,
