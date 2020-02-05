@@ -12,10 +12,10 @@ export const bulkCreate = async <T extends { id?: string }>(collection: Collecti
     logger(`[bulkCreate]: initialized on collection #${collection.id} in path ${collection.path}`, { data, dataLength: data?.length });
     (data || []).forEach(d => {
         const doc = getDocument<T>(collection, d);
-        batch.create(doc, data);
+        batch.create(doc, d);
     });
     const result = await batch.commit();
-    logger('[bulkCreate]: successfully completed', { writeTimes: result.map(r => r.writeTime.toDate()) });
+    logger('[bulkCreate]: successfully completed', { writeTimes: (result || []).map(r => r.writeTime.toDate()) });
     return result;
 };
 
@@ -24,10 +24,10 @@ export const bulkUpdate = async <T extends { id?: string }>(collection: Collecti
     logger(`[bulkUpdate]: initialized on collection #${collection.id} in path ${collection.path}`, { data, options, dataLength: data?.length });
     (data || []).forEach(d => {
         const doc = getDocument(collection, d);
-        batch.set(doc, data, options);
+        batch.set(doc, d, options);
     });
     const result = await batch.commit();
-    logger('[bulkUpdate]: successfully completed', { writeTimes: result.map(r => r.writeTime.toDate()) });
+    logger('[bulkUpdate]: successfully completed', { writeTimes: (result || []).map(r => r.writeTime.toDate()) });
     return result;
 };
 
@@ -36,7 +36,7 @@ export const bulkDelete = async (collection: CollectionReference, ids?: string[]
     logger(`[bulkCreate]: initialized on collection #${collection.id} in path ${collection.path}`, { ids, precondition });
     (ids || []).forEach(id => batch.delete(collection.doc(id), precondition));
     const result = await batch.commit();
-    logger('[bulkDelete]: successfully completed', { writeTimes: result.map(r => r.writeTime.toDate()) });
+    logger('[bulkDelete]: successfully completed', { writeTimes: (result || []).map(r => r.writeTime.toDate()) });
     return result;
 };
 
