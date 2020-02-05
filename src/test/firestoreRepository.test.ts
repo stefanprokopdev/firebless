@@ -1,6 +1,7 @@
+import { Firestore } from '@google-cloud/firestore';
 // @ts-ignore
 import MockFirebase from 'mock-cloud-firestore';
-import { defaultFirestoreRepository } from '../lib/index';
+import { defaultFirestoreRepository, initFirestore } from '../lib/index';
 import { idMatcher } from './matchers';
 
 const fixtures = {
@@ -38,6 +39,10 @@ interface User {
 const userRepository = defaultFirestoreRepository.bind<User>(firestore.collection('users'));
 
 describe('Firestore repository', () => {
+    it('Initialization', () => {
+        const db = initFirestore({});
+        expect(db).toBeInstanceOf(Firestore);
+    });
     it('List', async () => {
         const users = await userRepository.list();
         expect(Array.isArray(users)).toBe(true);
@@ -139,5 +144,38 @@ describe('Firestore repository', () => {
         } catch (_) {}
         const user = await userRepository.detailById('123');
         expect(user).toBeNull();
+    });
+    it.skip('Bulk create', async () => {
+        const prevUsers = await userRepository.list();
+        await userRepository.bulkCreate([
+            { age: 5, name: 'Philip', surname: 'Palencia' },
+            { age: 11, name: 'Dwayne', surname: 'Carter' },
+        ]);
+        const users = await userRepository.list();
+        expect(Array.isArray(prevUsers)).toBe(true);
+        expect(Array.isArray(users)).toBe(true);
+        expect(prevUsers.length).toBeLessThan(users.length);
+        expect(users.length - prevUsers.length).toBe(2);
+    });
+    it('Bulk update', async () => {
+        const prevUsers = await userRepository.list();
+        await userRepository.bulkUpdate(prevUsers.map(u => ({ id: u.id, name: 'Bulk', surname: 'Update' })));
+        const users = await userRepository.list();
+        expect(Array.isArray(prevUsers)).toBe(true);
+        expect(Array.isArray(users)).toBe(true);
+        expect(prevUsers.length).toEqual(prevUsers.length);
+        users.forEach(user => {
+            expect(user.name).toEqual('Bulk');
+            expect(user.surname).toEqual('Update');
+        });
+    });
+    it('Bulk delete', async () => {
+        const prevUsers = await userRepository.list();
+        await userRepository.bulkDelete(prevUsers.filter(u => u.id).map(u => u.id) as string[]);
+        const users = await userRepository.list();
+        expect(Array.isArray(prevUsers)).toBe(true);
+        expect(Array.isArray(users)).toBe(true);
+        expect(prevUsers.length).toBeGreaterThan(users.length);
+        expect(users.length).toEqual(0);
     });
 });
