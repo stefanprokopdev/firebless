@@ -1,7 +1,7 @@
-import FirebaseFirestore, { Firestore } from '@google-cloud/firestore';
+import { Firestore } from '@google-cloud/firestore';
 // @ts-ignore
 import MockFirebase from 'mock-cloud-firestore';
-import {applyFilters, defaultFirestoreRepository, initFirestore} from '../lib/index';
+import { defaultFirestoreRepository, initFirestore } from '../lib/index';
 import { idMatcher } from './matchers';
 
 const fixtures = {
