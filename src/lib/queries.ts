@@ -12,7 +12,7 @@ export const bulkCreate = async <T extends { id?: string }>(collection: Collecti
     logger(`[bulkCreate]: initialized on collection #${collection.id} in path ${collection.path}`, { data, dataLength: data?.length });
     (data || []).forEach(d => {
         const doc = getDocument<T>(collection, d);
-        batch.create(doc, d);
+        batch.set(doc, d);
     });
     const result = await batch.commit();
     logger('[bulkCreate]: successfully completed', { writeTimes: (result || []).map(r => r.writeTime.toDate()) });
@@ -68,14 +68,14 @@ export const remove = async <T extends { id?: string }>(collection: CollectionRe
     logger('[remove]: batch successfully initialized');
     documents.forEach(doc => batch.delete(doc.ref, precondition));
     const result = await batch.commit();
-    logger('[remove]: batch successfully completed', { writeTimes: result.map(r => r.writeTime.toDate()) });
+    logger('[remove]: batch successfully completed', { writeTimes: (result || []).map(r => r.writeTime.toDate()) });
     return result;
 };
 
 export const removeById = async (collection: CollectionReference, id: string, precondition?: Precondition) => {
     logger(`[removeById]: trying to remove doc ${id} from collection #${collection.id} in path ${collection.path}`, { precondition });
     const result = await collection.doc(id).delete(precondition);
-    logger(`[removeById]: successfully completed at ${result.writeTime.toDate()}`);
+    logger(`[removeById]: successfully completed at ${result?.writeTime?.toDate()}`);
     return result;
 };
 
@@ -101,7 +101,7 @@ export const update = async <T extends { id?: string }>(collection: CollectionRe
     logger('[update]: batch successfully initialized');
     documents.forEach(doc => batch.set(doc.ref, data, options));
     const result = await batch.commit();
-    logger('[update]: batch successfully completed', { writeTimes: result.map(r => r.writeTime.toDate()) });
+    logger('[update]: batch successfully completed', { writeTimes: (result || []).map(r => r.writeTime.toDate()) });
     return result;
 };
 
@@ -150,9 +150,6 @@ export const getModelData = <T>(record?: DocumentSnapshot | null): T | null => {
 
 export const applyFilters = <T extends object>(query: Query, filters?: Partial<T>) => {
     Object.keys(filters || []).forEach(field => {
-        if (['limit', 'offset'].includes(field)) {
-            return;
-        }
         // @ts-ignore
         query = query.where(field, '==', filters[field]);
     });
