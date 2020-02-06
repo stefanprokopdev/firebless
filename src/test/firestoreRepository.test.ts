@@ -1,7 +1,7 @@
-import { Firestore } from '@google-cloud/firestore';
+import FirebaseFirestore, { Firestore } from '@google-cloud/firestore';
 // @ts-ignore
 import MockFirebase from 'mock-cloud-firestore';
-import { defaultFirestoreRepository, initFirestore } from '../lib/index';
+import {applyFilters, defaultFirestoreRepository, initFirestore} from '../lib/index';
 import { idMatcher } from './matchers';
 
 const fixtures = {
@@ -139,13 +139,12 @@ describe('Firestore repository', () => {
         expect(user).toMatchSnapshot();
     });
     it('Delete by ID', async () => {
-        try {
-            await userRepository.deleteById('123');
-        } catch (_) {}
+        const result = await userRepository.deleteById('123');
+        expect(result).toBeUndefined();
         const user = await userRepository.detailById('123');
         expect(user).toBeNull();
     });
-    it.skip('Bulk create', async () => {
+    it('Bulk create', async () => {
         const prevUsers = await userRepository.list();
         await userRepository.bulkCreate([
             { age: 5, name: 'Philip', surname: 'Palencia' },
@@ -177,5 +176,45 @@ describe('Firestore repository', () => {
         expect(Array.isArray(users)).toBe(true);
         expect(prevUsers.length).toBeGreaterThan(users.length);
         expect(users.length).toEqual(0);
+    });
+    it('Delete with filters', async () => {
+        await userRepository.bulkCreate([
+            { id: 'test', name: 'Test', surname: 'Testovic', age: 25 },
+            { id: 'test2', name: 'Tester', surname: 'Testovic', age: 25 },
+            { id: 'new', name: 'New', surname: 'Test', age: 25 },
+        ]);
+        const users = await userRepository.list();
+        expect(Array.isArray(users)).toBe(true);
+        expect(users.length).toEqual(3);
+        await userRepository.delete({ surname: 'Testovic' });
+        const newUsers = await userRepository.list();
+        expect(Array.isArray(newUsers)).toBe(true);
+        expect(newUsers.length).toEqual(1);
+        expect(newUsers[0].id).toEqual('new');
+    });
+    it('Update with filters', async () => {
+        await userRepository.bulkCreate([
+            { id: 'test', name: 'Test', surname: 'Testovic', age: 25 },
+            { id: 'test2', name: 'Tester', surname: 'Testovic', age: 25 },
+        ]);
+        const users = await userRepository.list();
+        expect(Array.isArray(users)).toBe(true);
+        expect(users.length).toEqual(3);
+        await userRepository.update({ surname: 'Testovic' }, { name: 'Peter' });
+        const updatedUsers = await userRepository.list({ name: 'Peter' });
+        expect(Array.isArray(updatedUsers)).toBe(true);
+        expect(updatedUsers.length).toEqual(2);
+    });
+    it('Create with no data', async () => {
+        const user = await userRepository.create();
+        expect(user).toBeNull();
+    });
+    it('Update with no data', async () => {
+        const user = await userRepository.updateById('1');
+        expect(user).toBeNull();
+    });
+    it('Upsert with no data', async () => {
+        const user = await userRepository.upsert();
+        expect(user).toBeNull();
     });
 });
