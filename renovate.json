@@ -1,0 +1,23 @@
+{
+  "extends": [
+    "config:base"
+  ],
+  "schedule": ["every weekend"],
+  "packageRules": [
+    {
+      "updateTypes": ["minor", "patch"]
+    },
+    {
+      "managers": ["npm"],
+      "depTypeList": ["devDependencies"],
+      "enabled": false
+    }
+  ],
+  "baseBranches": ["master"],
+  "commitMessagePrefix": "⬆️",
+  "commitMessageAction": "Upgrade",
+  "commitMessageTopic": "{{depName}} dependency",
+  "commitMessageExtra": "",
+  "commitMessageSuffix": "",
+  "assignees": ["stefan-prokop-cz"]
+}
