@@ -7,6 +7,10 @@
     "updateTypes": ["minor", "patch"]
   }],
   "baseBranches": ["master"],
-  "commitMessage": "⬆️ Upgrade {{depName}} dependency",
+  "commitMessagePrefix": "⬆️",
+  "commitMessageAction": "Upgrade",
+  "commitMessageTopic": "{{depName}} dependency",
+  "commitMessageExtra": "",
+  "commitMessageSuffix": "",
   "assignees": ["stefan-prokop-cz"]
 }
