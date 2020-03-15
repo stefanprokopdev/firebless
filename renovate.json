@@ -1,5 +1,12 @@
 {
   "extends": [
     "config:base"
-  ]
+  ],
+  "schedule": ["every weekend"],
+  "packageRules": [{
+    "updateTypes": ["minor", "patch"]
+  }],
+  "baseBranches": ["master"],
+  "commitMessage": "⬆️ Upgrade {{depName}} dependency",
+  "assignees": ["stefan-prokop-cz"]
 }
