@@ -3,9 +3,16 @@
     "config:base"
   ],
   "schedule": ["every weekend"],
-  "packageRules": [{
-    "updateTypes": ["minor", "patch"]
-  }],
+  "packageRules": [
+    {
+      "updateTypes": ["minor", "patch"]
+    },
+    {
+      "managers": ["npm"],
+      "depTypeList": ["devDependencies"],
+      "enabled": false
+    }
+  ],
   "baseBranches": ["master"],
   "commitMessagePrefix": "⬆️",
   "commitMessageAction": "Upgrade",
