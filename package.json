@@ -30,7 +30,7 @@
     "check": "npm-check -i app -i errors -i config -i index & exit 0"
   },
   "dependencies": {
-    "@google-cloud/firestore": "^3.4.1"
+    "@google-cloud/firestore": "^4.0.0"
   },
   "devDependencies": {
     "@types/jest": "^25.1.1",
