@@ -7,9 +7,6 @@
   "files": [
     "dist/*"
   ],
-  "engines": {
-    "node": "^12.14.1"
-  },
   "repository": {
     "type": "git",
     "url": "https://github.com/stefan-prokop-cz/firebless"
