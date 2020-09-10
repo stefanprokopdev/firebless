@@ -13,12 +13,12 @@ export const bulkCreate = async <T extends { id?: string }>(collection: Collecti
         data,
         dataLength: data?.length,
     });
-    (data || []).forEach(d => {
+    (data || []).forEach((d) => {
         const doc = getDocument<T>(collection, d);
         batch.set(doc, d);
     });
     const result = await batch.commit();
-    logger('[bulkCreate]: successfully completed', { writeTimes: (result || []).map(r => r.writeTime.toDate()) });
+    logger('[bulkCreate]: successfully completed', { writeTimes: (result || []).map((r) => r.writeTime.toDate()) });
     return result;
 };
 
@@ -33,12 +33,12 @@ export const bulkUpdate = async <T extends { id?: string }>(
         options,
         dataLength: data?.length,
     });
-    (data || []).forEach(d => {
+    (data || []).forEach((d) => {
         const doc = getDocument(collection, d);
-        batch.set(doc, d, options);
+        batch.set(doc, d, options ?? {});
     });
     const result = await batch.commit();
-    logger('[bulkUpdate]: successfully completed', { writeTimes: (result || []).map(r => r.writeTime.toDate()) });
+    logger('[bulkUpdate]: successfully completed', { writeTimes: (result || []).map((r) => r.writeTime.toDate()) });
     return result;
 };
 
@@ -48,9 +48,9 @@ export const bulkDelete = async (collection: CollectionReference, ids?: string[]
         ids,
         precondition,
     });
-    (ids || []).forEach(id => batch.delete(collection.doc(id), precondition));
+    (ids || []).forEach((id) => batch.delete(collection.doc(id), precondition));
     const result = await batch.commit();
-    logger('[bulkDelete]: successfully completed', { writeTimes: (result || []).map(r => r.writeTime.toDate()) });
+    logger('[bulkDelete]: successfully completed', { writeTimes: (result || []).map((r) => r.writeTime.toDate()) });
     return result;
 };
 
@@ -94,9 +94,9 @@ export const remove = async <T extends { id?: string }>(
     const documents = await list<T>(collection, params, options);
     const batch = collection.firestore.batch();
     logger('[remove]: batch successfully initialized');
-    documents.forEach(doc => batch.delete(doc.ref, precondition));
+    documents.forEach((doc) => batch.delete(doc.ref, precondition));
     const result = await batch.commit();
-    logger('[remove]: batch successfully completed', { writeTimes: (result || []).map(r => r.writeTime.toDate()) });
+    logger('[remove]: batch successfully completed', { writeTimes: (result || []).map((r) => r.writeTime.toDate()) });
     return result;
 };
 
@@ -142,9 +142,9 @@ export const update = async <T extends { id?: string }>(
     logger(`[update]: ${documents.length} documents found`);
     const batch = collection.firestore.batch();
     logger('[update]: batch successfully initialized');
-    documents.forEach(doc => batch.set(doc.ref, data, options));
+    documents.forEach((doc) => batch.set(doc.ref, data || {}, options ?? {}));
     const result = await batch.commit();
-    logger('[update]: batch successfully completed', { writeTimes: (result || []).map(r => r.writeTime.toDate()) });
+    logger('[update]: batch successfully completed', { writeTimes: (result || []).map((r) => r.writeTime.toDate()) });
     return result;
 };
 
@@ -162,7 +162,7 @@ export const updateById = async <T extends { id?: string }>(
         logger('[updateById]: empty data', { data });
         return null;
     }
-    await collection.doc(id).set(data, options);
+    await collection.doc(id).set(data, options ?? {});
     logger(`[updateById]: document #${id} successfully updated`);
     return detailById(collection, id);
 };
@@ -179,7 +179,7 @@ export const upsert = async <T extends { id?: string }>(
     }
     const doc = getDocument(collection, data);
     logger(`[upsert]: document ${doc.id} initialized`);
-    await doc.set(data, options);
+    await doc.set(data, options ?? {});
     logger(`[upsert]: document ${doc.id} successfully created / updated`);
     return doc.get();
 };
@@ -204,7 +204,7 @@ export const getModelData = <T>(record?: DocumentSnapshot | null): T | null => {
 };
 
 export const applyFilters = <T extends object>(query: Query, filters?: Partial<T>) => {
-    Object.keys(filters || []).forEach(field => {
+    Object.keys(filters || []).forEach((field) => {
         // @ts-ignore
         query = query.where(field, '==', filters[field]);
     });

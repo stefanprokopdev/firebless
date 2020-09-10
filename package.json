@@ -27,20 +27,20 @@
     "check": "npm-check -i app -i errors -i config -i index & exit 0"
   },
   "dependencies": {
-    "@google-cloud/firestore": "^3.4.1"
+    "@google-cloud/firestore": "^4.2.0"
   },
   "devDependencies": {
-    "@types/jest": "^25.1.1",
-    "husky": "^4.2.1",
-    "jest": "^25.1.0",
-    "lint-staged": "^10.0.7",
-    "mock-cloud-firestore": "^0.11.0",
-    "npm-check": "^5.9.0",
-    "prettier": "^1.19.1",
+    "@types/jest": "^26.0.13",
+    "husky": "^4.3.0",
+    "jest": "^26.4.2",
+    "lint-staged": "^10.3.0",
+    "mock-cloud-firestore": "^0.12.0",
+    "npm-check": "^5.9.2",
+    "prettier": "^2.1.1",
     "prettier-config-ackee": "^0.0.13",
-    "ts-jest": "^25.1.0",
+    "ts-jest": "^26.3.0",
     "tslint-config-ackee": "^0.3.0",
-    "typedoc": "^0.16.9",
-    "typescript": "^3.7.5"
+    "typedoc": "^0.19.1",
+    "typescript": "^4.0.2"
   }
 }
