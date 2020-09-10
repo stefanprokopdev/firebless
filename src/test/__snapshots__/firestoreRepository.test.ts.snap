@@ -30,14 +30,14 @@ Object {
 
 exports[`Firestore repository Detail with filters 1`] = `
 Object {
-  "age": 30,
+  "age": 15,
   "birthDate": Object {
     "toDate": [Function],
   },
   "createdAt": undefined,
-  "id": "user_b",
+  "id": "user_a",
   "name": "user",
-  "surname": "b",
+  "surname": "c",
   "updatedAt": undefined,
 }
 `;
@@ -72,8 +72,13 @@ Object {
 
 exports[`Firestore repository Update by ID 1`] = `
 Object {
+  "age": 15,
+  "birthDate": Object {
+    "toDate": [Function],
+  },
   "createdAt": undefined,
   "id": "user_a",
+  "name": "user",
   "surname": "c",
   "updatedAt": undefined,
 }
