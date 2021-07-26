@@ -77,7 +77,8 @@
 				<a href="#install" id="install" style="color: inherit; text-decoration: none;">
 					<h2>Install</h2>
 				</a>
-				<pre><code><span class="hljs-built_in">npm</span> i firebless</code></pre>
+				<pre><code><span class="hljs-built_in">npm</span> i firebless
+</code></pre>
 				<a href="#basic-usage" id="basic-usage" style="color: inherit; text-decoration: none;">
 					<h2>Basic usage</h2>
 				</a>
@@ -92,7 +93,8 @@
 <span class="hljs-keyword">const</span> userRepository = defaultFirestoreRepository.bind&lt;User&gt;(db.collection(<span class="hljs-string">&#x27;users&#x27;</span>));
 <span class="hljs-comment">// userRepository.detailById(&#x27;123&#x27;)</span>
 <span class="hljs-comment">// userRepository.list({ name: &#x27;Test&#x27; })</span>
-<span class="hljs-comment">// ...</span></code></pre>
+<span class="hljs-comment">// ...</span>
+</code></pre>
 				<a href="#custom-repository" id="custom-repository" style="color: inherit; text-decoration: none;">
 					<h2>Custom repository</h2>
 				</a>
@@ -113,7 +115,8 @@
         ...defaultRepo,
         list,
     };
-})(defaultFirestoreRepository.bind&lt;User&gt;(db.collection(<span class="hljs-string">&#x27;users&#x27;</span>)));</code></pre>
+})(defaultFirestoreRepository.bind&lt;User&gt;(db.collection(<span class="hljs-string">&#x27;users&#x27;</span>)));
+</code></pre>
 				<a href="#examples" id="examples" style="color: inherit; text-decoration: none;">
 					<h2>Examples</h2>
 				</a>
@@ -140,9 +143,10 @@
 				<a href="#testing" id="testing" style="color: inherit; text-decoration: none;">
 					<h2>Testing</h2>
 				</a>
-				<pre><code>npm t
+				<pre><code><span class="hljs-built_in">npm</span> t
 
-npm <span class="hljs-keyword">run</span><span class="bash"> <span class="hljs-built_in">test</span>:coverage</span></code></pre>
+<span class="hljs-built_in">npm</span> run test:coverage
+</code></pre>
 				<a href="#license" id="license" style="color: inherit; text-decoration: none;">
 					<h2>License</h2>
 				</a>
@@ -159,20 +163,8 @@ npm <span class="hljs-keyword">run</span><span class="bash"> <span class="hljs-b
 			</nav>
 			<nav class="tsd-navigation secondary menu-sticky">
 				<ul class="before-current">
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#collectionreference" class="tsd-kind-icon">Collection<wbr>Reference</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#documentsnapshot" class="tsd-kind-icon">Document<wbr>Snapshot</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#precondition" class="tsd-kind-icon">Precondition</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#query" class="tsd-kind-icon">Query</a>
-					</li>
-					<li class=" tsd-kind-variable">
-						<a href="globals.html#setoptions" class="tsd-kind-icon">Set<wbr>Options</a>
+					<li class=" tsd-kind-type-alias tsd-has-type-parameter">
+						<a href="globals.html#allowtype" class="tsd-kind-icon">Allow<wbr>Type</a>
 					</li>
 					<li class=" tsd-kind-variable">
 						<a href="globals.html#logger" class="tsd-kind-icon">logger</a>
