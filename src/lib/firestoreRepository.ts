@@ -16,17 +16,21 @@ import {
     upsert,
 } from './queries';
 
+type AllowType<O extends { id?: any }, Allowed> = {
+    [K in keyof Omit<O, 'id'>]: O[K] | Allowed;
+} & Pick<O, 'id'>
+
 export const bind = <Model extends { id?: string }>(collection: CollectionReference) => {
     return {
-        bulkCreate: (data?: Partial<Model>[]) => bulkCreate<Model>(collection, data),
-        bulkUpdate: (data?: Partial<Model>[], options?: SetOptions) =>
-            bulkUpdate<Model>(collection, data, {
+        bulkCreate: (data?: Partial<AllowType<Model, FieldValue>>[]) => bulkCreate<AllowType<Model, FieldValue>>(collection, data),
+        bulkUpdate: (data?: Partial<AllowType<Model, FieldValue>>[], options?: SetOptions) =>
+            bulkUpdate<AllowType<Model, FieldValue>>(collection, data, {
                 merge: true,
                 ...options,
             }),
         bulkDelete: (ids?: string[], precondition?: Precondition) => bulkDelete(collection, ids, precondition),
-        create: async (data?: Partial<Model>) => {
-            const doc = await create<Model>(collection, data);
+        create: async (data?: Partial<AllowType<Model, FieldValue>>) => {
+            const doc = await create<AllowType<Model, FieldValue>>(collection, data);
             return getModelData(doc) as Model;
         },
         delete: (params?: Partial<Model>, options?: Query) => remove<Model>(collection, params, options),
@@ -45,20 +49,20 @@ export const bind = <Model extends { id?: string }>(collection: CollectionRefere
             const docs = await list<Model>(collection, filters, options);
             return docs.map(doc => getModelData<Model>(doc)) as Model[];
         },
-        update: (params?: Partial<Model>, data?: Partial<Model>, options?: SetOptions) =>
-            update<Model>(collection, params, data, {
+        update: (params?: Partial<AllowType<Model, FieldValue>>, data?: Partial<AllowType<Model, FieldValue>>, options?: SetOptions) =>
+            update<AllowType<Model, FieldValue>>(collection, params, data, {
                 merge: true,
                 ...options,
             }),
-        updateById: async (id: string, data?: Partial<Model>, options?: SetOptions) => {
-            const doc = await updateById<Model>(collection, id, data, {
+        updateById: async (id: string, data?: Partial<AllowType<Model, FieldValue>>, options?: SetOptions) => {
+            const doc = await updateById<AllowType<Model, FieldValue>>(collection, id, data, {
                 merge: true,
                 ...options,
             });
             return getModelData(doc) as Model;
         },
-        upsert: async (data?: Partial<Model>, options?: SetOptions) => {
-            const doc = await upsert<Model>(collection, data, {
+        upsert: async (data?: Partial<AllowType<Model, FieldValue>>, options?: SetOptions) => {
+            const doc = await upsert<AllowType<Model, FieldValue>>(collection, data, {
                 merge: true,
                 ...options,
             });
