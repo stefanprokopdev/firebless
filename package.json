@@ -23,24 +23,18 @@
     "test:coverage": "npm run test -- --collectCoverage",
     "lint": "tslint -t codeFrame -p .",
     "prepare": "npm run build",
-    "docs": "typedoc --options typedoc.json src/lib/*.ts",
-    "check": "npm-check -i app -i errors -i config -i index & exit 0"
+    "docs": "typedoc --options typedoc.json src/lib/*.ts"
   },
   "dependencies": {
     "@google-cloud/firestore": "^4.2.0"
   },
   "devDependencies": {
     "@types/jest": "^26.0.13",
-    "husky": "^4.3.0",
     "jest": "^26.4.2",
-    "lint-staged": "^10.3.0",
     "mock-cloud-firestore": "^0.12.0",
-    "npm-check": "^5.9.2",
-    "prettier": "^2.1.1",
-    "prettier-config-ackee": "^0.0.13",
     "ts-jest": "^26.3.0",
     "tslint-config-ackee": "^0.3.0",
-    "typedoc": "^0.19.1",
+    "typedoc": "^0.21.4",
     "typescript": "^4.0.2"
   }
 }
