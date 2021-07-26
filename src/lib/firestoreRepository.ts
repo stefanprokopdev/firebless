@@ -1,7 +1,5 @@
-import CollectionReference = FirebaseFirestore.CollectionReference;
-import SetOptions = FirebaseFirestore.SetOptions;
-import Query = FirebaseFirestore.Query;
-import Precondition = FirebaseFirestore.Precondition;
+import type { CollectionReference, SetOptions, Query, Precondition, FieldValue } from '@google-cloud/firestore';
+
 import {
     bulkCreate,
     bulkDelete,

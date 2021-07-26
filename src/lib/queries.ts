@@ -1,9 +1,5 @@
 import util from 'util';
-import CollectionReference = FirebaseFirestore.CollectionReference;
-import DocumentSnapshot = FirebaseFirestore.DocumentSnapshot;
-import SetOptions = FirebaseFirestore.SetOptions;
-import Query = FirebaseFirestore.Query;
-import Precondition = FirebaseFirestore.Precondition;
+import type { DocumentSnapshot, CollectionReference, SetOptions, Query, Precondition } from '@google-cloud/firestore';
 
 const logger = util.debuglog('firebless');
 
